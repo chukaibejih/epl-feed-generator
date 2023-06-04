@@ -15,7 +15,6 @@ from atproto import Client, models
 # YOUR bluesky handle
 # Ex: user.bsky.social
 HANDLE: str = os.environ.get('HANDLE', None)
-print(HANDLE)
 
 # YOUR bluesky password, or preferably an App Password (found in your client settings)
 # Ex: abcd-1234-efgh-5678
@@ -28,7 +27,7 @@ HOSTNAME: str = os.environ.get('HOSTNAME', None)
 # A short name for the record that will show in urls
 # Lowercase with no spaces.
 # Ex: whats-hot
-RECORD_NAME: str = 'epl-buzz'
+RECORD_NAME: str = 'epl-buzz'   
 
 # A display name for your feed
 # Ex: What's Hot
@@ -43,7 +42,7 @@ DESCRIPTION: str = 'Stay updated with the latest skeets on the English Premier L
 AVATAR_PATH: str = 'avatar/vecteezy_premier-league-symbol-logo-white-and-black-design-england_10994266.jpg'
 
 # (Optional). Only use this if you want a service did different from did:web
-SERVICE_DID: str = ''
+SERVICE_DID: str = os.environ.get('SERVICE_DID', None)
 
 
 # -------------------------------------
