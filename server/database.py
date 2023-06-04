@@ -1,9 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 from datetime import datetime
 
 import peewee
+import psycopg2
 
 
-db = peewee.SqliteDatabase('feed_database.db')
+db = peewee.PostgresqlDatabase(os.environ.get('POSTGRES_URI', None))
 
 
 class BaseModel(peewee.Model):
