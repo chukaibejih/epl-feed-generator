@@ -1,5 +1,5 @@
-from . import whats_alf
+from . import epl_feed
 
 algos = {
-    whats_alf.uri: whats_alf.handler
+    epl_feed.uri: epl_feed.handler
 }
