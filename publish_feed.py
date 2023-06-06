@@ -22,7 +22,7 @@ PASSWORD: str = os.environ.get('PASSWORD', None)
 
 # The hostname of the server where feed server will be hosted
 # Ex: feed.bsky.dev
-HOSTNAME: str = os.environ.get('HOSTNAME', None)
+HOSTNAME: str = os.environ.get('EPL_HOSTNAME', None)
 
 # A short name for the record that will show in urls
 # Lowercase with no spaces.
@@ -75,8 +75,8 @@ def main():
             avatar=avatar_blob,
             createdAt=datetime.now().isoformat(),
         )
+        
     ))
-
     print('Successfully published!')
     print('Feed URI (put in "WHATS_ALF_URI" env var):', response.uri)
 
