@@ -1,4 +1,7 @@
 import logging
+
+from atproto import models
+
 from server.database import db, Post
 
 logger = logging.getLogger(__name__)
@@ -33,15 +36,25 @@ epl_key_names = [
 
 
 def operations_callback(ops: dict) -> None:
+    # Here we can filter, process, run ML classification, etc.
+    # After our feed alg we can save posts into our DB
+    # Also, we should process deleted posts to remove them from our DB and keep it in sync
+
+    # for example, let's create our custom feed that will contain all posts that contains alf related text
+
     posts_to_create = []
     for created_post in ops['posts']['created']:
         record = created_post['record']
-        post_text = record.text.lower()
 
-        # Check if the post text contains English Premier League key names
-        if any(key_name in post_text for key_name in epl_key_names):
-            reply_parent = record.reply.parent.uri if record.reply and record.reply.parent.uri else None
-            reply_root = record.reply.root.uri if record.reply and record.reply.root.uri else None
+        # only epl_key_names-related posts
+        if any(key in record.text.lower() for key in epl_key_names):
+            reply_parent = None
+            if record.reply and record.reply.parent.uri:
+                reply_parent = record.reply.parent.uri
+
+            reply_root = None
+            if record.reply and record.reply.root.uri:
+                reply_root = record.reply.root.uri
 
             post_dict = {
                 'uri': created_post['uri'],
@@ -53,12 +66,11 @@ def operations_callback(ops: dict) -> None:
 
     posts_to_delete = [p['uri'] for p in ops['posts']['deleted']]
     if posts_to_delete:
-        delete_query = Post.delete().where(Post.uri.in_(posts_to_delete))
-        delete_query.execute()
+        Post.delete().where(Post.uri.in_(posts_to_delete))
         logger.info(f'Deleted from feed: {len(posts_to_delete)}')
 
     if posts_to_create:
         with db.atomic():
             for post_dict in posts_to_create:
-                post = Post.create(**post_dict)
+                Post.create(**post_dict)
         logger.info(f'Added to feed: {len(posts_to_create)}')
