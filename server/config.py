@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SERVICE_DID = os.environ.get('SERVICE_DID', None)
-HOSTNAME = os.environ.get('HOSTNAME', None)
+HOSTNAME = os.environ.get('EPL_HOSTNAME', None)
 
 if HOSTNAME is None:
     raise RuntimeError('You should set "HOSTNAME" environment variable first.')
