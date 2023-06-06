@@ -4,6 +4,9 @@
 .env
 *.db
 
+client_test.py
+client_test
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
