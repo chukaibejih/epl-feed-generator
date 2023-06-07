@@ -35,7 +35,7 @@ DISPLAY_NAME: str = 'EPL Buzz'
 
 # (Optional) A description of your feed
 # Ex: Top trending content from the whole network
-DESCRIPTION: str = 'Stay updated with the latest skeets on the English Premier League. Get all the buzz surrounding your favorite EPL clubs and players.'
+DESCRIPTION: str = 'Use #epl and stay updated with the latest posts on the English Premier League. Get all the buzz surrounding your favorite EPL clubs and players.'
 
 # (Optional) The path to an image to be used as your feed's avatar
 # Ex: ./path/to/avatar.jpeg

@@ -44,8 +44,8 @@ def operations_callback(ops):
     for created_post in ops['posts']['created']:
         record = created_post['record']
 
-        # Only EPL-related posts
-        if any(key in record['text'].lower() for key in epl_key_names):
+        # #epl posts
+        if any(key in record['text'].lower() for key in epl_key_names) or '#epl' in record['text'].lower() or '#EPL' in record['text']:
             reply_parent = None
             if record['reply'] and record['reply']['parent']['uri']:
                 reply_parent = record['reply']['parent']['uri']
