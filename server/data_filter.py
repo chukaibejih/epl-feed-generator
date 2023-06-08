@@ -27,7 +27,6 @@ epl_key_names = [
     'west ham united',
     'wolverhampton wanderers',
     'premier league',
-    'epl',
     'man utd',
     'man city',
     '#epl',
